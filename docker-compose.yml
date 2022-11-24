@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  api-dev:
+    build:
+      context: .
+      target: builder
+    entrypoint: yarn start:debug 0.0.0.0:9229
+    ports:
+      - 3000:3000
+      - 9229:9229
+    volumes:
+      - ./:/app
+
+  api-prod:
+    build:
+      context: .
+      target: server
+    volumes:
+      - ./:/app
+    ports:
+      - 3001:3001
