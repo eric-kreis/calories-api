@@ -3,20 +3,39 @@ version: '3.8'
 services:
   api-dev:
     build:
-      context: .
+      context: ./api
       target: builder
     entrypoint: yarn start:debug 0.0.0.0:9229
     ports:
       - 3000:3000
       - 9229:9229
     volumes:
-      - ./:/app
+      - ./api:/app
+    network_mode: host
+    depends_on:
+      - mongo
 
   api-prod:
     build:
-      context: .
+      context: ./api
       target: server
     volumes:
-      - ./:/app
+      - ./api:/app
     ports:
-      - 3001:3001
+      - 3000:3000
+    network_mode: host
+    depends_on:
+      - mongo
+
+  mongo:
+    build: ./docker/mongo-replicaset
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: admin
+      MONGO_INITDB_DATABASE: calories
+      MONGO_REPLICA_HOST: localhost
+      MONGO_REPLICA_PORT: 27018
+    volumes:
+      - ./.docker/mongo:/data/db
+    ports:
+      - 27018:27018
