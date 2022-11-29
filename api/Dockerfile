@@ -3,6 +3,7 @@ FROM node:18-alpine3.16 as builder
 WORKDIR /app
 
 COPY package.json yarn.lock ./
+COPY prisma ./prisma
 
 RUN yarn --only=builder
 
@@ -22,6 +23,7 @@ ENV NODE_ENV=${NODE_ENV}
 WORKDIR /app
 
 COPY package.json yarn.lock ./
+COPY prisma ./prisma
 
 RUN yarn --prod --only=production
 
