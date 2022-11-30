@@ -77,6 +77,8 @@ describe('UserRepository', () => {
       order: 'asc',
       orderBy: 'createdAt',
       role: Roles.ADMIN,
+      email: '.dev',
+      name: 'name',
     };
 
     it('should return users', async () => {
@@ -88,7 +90,11 @@ describe('UserRepository', () => {
       expect(prismaService.user.findMany).toHaveBeenCalled();
       expect(prismaService.user.findMany).toHaveBeenCalledTimes(1);
       expect(prismaService.user.findMany).toHaveBeenCalledWith({
-        where: { role: searchUsersPayload.role },
+        where: {
+          role: searchUsersPayload.role,
+          email: { contains: searchUsersPayload.email },
+          name: { contains: searchUsersPayload.name, mode: 'insensitive' },
+        },
         take: searchUsersPayload.count,
         skip: searchUsersPayload.page * searchUsersPayload.count,
         orderBy: { [searchUsersPayload.orderBy]: searchUsersPayload.order },
@@ -142,9 +148,9 @@ describe('UserRepository', () => {
       );
 
       expect(user).toBeDefined();
+      expect(user).toEqual(regularUserMock);
       expect(prismaService.user.update).toHaveBeenCalled();
       expect(prismaService.user.update).toHaveBeenCalledTimes(1);
-      expect(user).toEqual(regularUserMock);
     });
 
     it('should throw a conflict error if email already exists', async () => {
