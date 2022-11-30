@@ -4,6 +4,8 @@ import {
   ClassSerializerInterceptor,
   Controller,
   Get,
+  HttpCode,
+  HttpStatus,
   Post,
   Request,
   UseGuards,
@@ -30,6 +32,7 @@ export class AuthController {
   }
 
   @Post('signIn')
+  @HttpCode(HttpStatus.OK)
   public async signIn(@Body() signInPayload: SignInDTO): Promise<UserEntity> {
     return this._authService.signIn(signInPayload.email, signInPayload.password);
   }
