@@ -16,6 +16,13 @@
     "noImplicitAny": true,
     "strictBindCallApply": true,
     "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "@repositories/*": ["./src/shared/repositories/*"],
+      "@services/*": ["./src/shared/services/*"],
+      "@dtos/*": ["./src/shared/dtos/*"],
+      "@user/*": ["./src/user/*"],
+      "@mocks/*": ["./src/shared/mocks/*"]
+    }
   }
 }
