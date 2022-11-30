@@ -38,9 +38,21 @@ export class UserRepository {
     name,
     email,
     role,
-  }: FindUsersDTO) {
+  }: FindUsersDTO): Promise<UserEntity[]> {
+    const where: Prisma.UserWhereInput = {
+      role,
+    };
+
+    if (email) {
+      where.email = { contains: email };
+    }
+
+    if (name) {
+      where.name = { contains: name, mode: 'insensitive' };
+    }
+
     return this._prisma.user.findMany({
-      where: { name, email, role },
+      where,
       take: count,
       skip: page * count,
       orderBy: { [orderBy]: order },
@@ -64,7 +76,7 @@ export class UserRepository {
       role,
       caloriesPerDay,
     }: UpdateUserDTO,
-  ) {
+  ): Promise<UserEntity> {
     await this._prisma.user.findUniqueOrThrow({ where: { id } });
 
     if (email) {
@@ -89,7 +101,7 @@ export class UserRepository {
     });
   }
 
-  public async delete(id: string) {
+  public async delete(id: string): Promise<UserEntity> {
     await this._prisma.user.findUniqueOrThrow({ where: { id } });
     return this._prisma.user.delete({ where: { id } });
   }
