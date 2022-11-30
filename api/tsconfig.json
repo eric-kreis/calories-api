@@ -23,9 +23,12 @@
     ],
     "paths": {
       "@repositories/*": ["./src/shared/repositories/*"],
-      "@services/*": ["./src/shared/services/*"],
+      "@services/*": ["src/shared/services/*"],
       "@dtos/*": ["./src/shared/dtos/*"],
+      "@decorators/*": ["./src/shared/decorators/*"],
+      "@guards/*": ["./src/shared/guards/*"],
       "@user/*": ["./src/user/*"],
+      "@auth/*": ["./src/auth/*"],
       "@mocks/*": ["./src/shared/mocks/*"]
     }
   }

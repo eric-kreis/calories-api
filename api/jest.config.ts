@@ -17,8 +17,11 @@ const config: Config.InitialOptions = {
   moduleNameMapper: {
     '^@repositories/(.*)': '<rootDir>/shared/repositories/$1',
     '^@services/(.*)': '<rootDir>/shared/services/$1',
+    '^@decorators/(.*)': '<rootDir>/shared/decorators/$1',
+    '^@guards/(.*)': '<rootDir>/shared/guards/$1',
     '^@dtos/(.*)': '<rootDir>/shared/dtos/$1',
     '^@user/(.*)': '<rootDir>/user/$1',
+    '^@auth/(.*)': '<rootDir>/auth/$1',
     '^@mocks/(.*)': '<rootDir>/shared/mocks/$1',
   },
   coveragePathIgnorePatterns: [
