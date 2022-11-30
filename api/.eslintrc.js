@@ -19,6 +19,19 @@ module.exports = {
   rules: {
     'import/prefer-default-export': 'off',
     'class-methods-use-this': 'off',
-    'import/no-extraneous-dependencies': ['error', { devDependencies: true }]
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'no-underscore-dangle': 'off',
+    '@typescript-eslint/indent': [
+      'error',
+      2,
+      {
+        ignoredNodes: [
+          'FunctionExpression > .params[decorators.length > 0]',
+          'FunctionExpression > .params > :matches(Decorator, :not(:first-child))',
+          'ClassBody.body > PropertyDefinition[decorators.length > 0] > .key',
+        ],
+      },
+    ],
+    '@typescript-eslint/dot-notation': 'off',
   },
 };
