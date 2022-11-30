@@ -2,6 +2,7 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { HttpExceptionFilter } from './shared/filters/http-exception.filter';
+import { PrismaExceptionFilter } from './shared/filters/prisma-exception.filter';
 import { PrismaService } from './shared/services/prisma.service';
 
 const logger = new Logger('App');
@@ -12,6 +13,7 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe({ transform: true, whitelist: true }));
   app.useGlobalFilters(new HttpExceptionFilter());
+  app.useGlobalFilters(new PrismaExceptionFilter());
 
   const prismaService = app.get(PrismaService);
   await prismaService.enableShutdownHooks(app);
