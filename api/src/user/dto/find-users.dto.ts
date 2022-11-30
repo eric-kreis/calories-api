@@ -22,8 +22,10 @@ export class FindUsersDTO extends PaginationDTO {
 
   @IsIn(Object.keys(Prisma.UserScalarFieldEnum))
   @IsNotIn([Prisma.UserScalarFieldEnum.password])
-  orderBy: Exclude<Prisma.UserScalarFieldEnum, 'password'> = 'createdAt';
+  @IsOptional()
+  orderBy: Exclude<Prisma.UserScalarFieldEnum, 'password'> = Prisma.UserScalarFieldEnum.createdAt;
 
   @IsIn(Object.keys(Prisma.SortOrder))
-  order: Prisma.SortOrder = 'desc';
+  @IsOptional()
+  order: Prisma.SortOrder = Prisma.SortOrder.desc;
 }
