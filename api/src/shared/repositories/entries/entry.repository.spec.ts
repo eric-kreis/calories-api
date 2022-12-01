@@ -97,17 +97,14 @@ describe('EntryRepository', () => {
 
     it('should update an entry', async () => {
       prismaService.entry.update.mockResolvedValue(entryMock);
-      prismaService.entry.findUniqueOrThrow.mockResolvedValue(entryMock);
       prismaService.entry.findMany.mockResolvedValue(entriesMock);
 
-      const updatedEntry = await repository.update(entryMock.id, updateEntryPayload);
+      const updatedEntry = await repository.update(entryMock.id, updateEntryPayload, entryMock);
 
       expect(updatedEntry).toBeDefined();
       expect(updatedEntry).toEqual(entryMock);
       expect(prismaService.entry.update).toHaveBeenCalled();
       expect(prismaService.entry.update).toHaveBeenCalledTimes(1);
-      expect(prismaService.entry.findUniqueOrThrow).toHaveBeenCalled();
-      expect(prismaService.entry.findUniqueOrThrow).toHaveBeenCalledTimes(1);
       expect(prismaService.entry.findMany).toHaveBeenCalled();
       expect(prismaService.entry.findMany).toHaveBeenCalledTimes(1);
     });
@@ -116,7 +113,6 @@ describe('EntryRepository', () => {
   describe('delete()', () => {
     it('should delete an entry', async () => {
       prismaService.entry.delete.mockResolvedValue(entryMock);
-      prismaService.entry.findUniqueOrThrow.mockResolvedValue(entryMock);
 
       const deletedEntry = await repository.delete(entryMock.id);
 
@@ -124,8 +120,6 @@ describe('EntryRepository', () => {
       expect(deletedEntry).toEqual(entryMock);
       expect(prismaService.entry.delete).toHaveBeenCalled();
       expect(prismaService.entry.delete).toHaveBeenCalledTimes(1);
-      expect(prismaService.entry.findUniqueOrThrow).toHaveBeenCalled();
-      expect(prismaService.entry.findUniqueOrThrow).toHaveBeenCalledTimes(1);
     });
   });
 });
