@@ -50,9 +50,9 @@ describe('UserRepository', () => {
       const user = await repository.create(createUserPayload);
 
       expect(user).toBeDefined();
+      expect(user).toEqual(regularUserMock);
       expect(prismaService.user.create).toHaveBeenCalled();
       expect(prismaService.user.create).toHaveBeenCalledTimes(1);
-      expect(user).toEqual(regularUserMock);
     });
 
     it('should throw a conflict error if email already exists', async () => {
@@ -87,6 +87,7 @@ describe('UserRepository', () => {
       const users = await repository.findAll(searchUsersPayload);
 
       expect(users).toBeDefined();
+      expect(users).toEqual(usersMock);
       expect(prismaService.user.findMany).toHaveBeenCalled();
       expect(prismaService.user.findMany).toHaveBeenCalledTimes(1);
       expect(prismaService.user.findMany).toHaveBeenCalledWith({
@@ -99,8 +100,6 @@ describe('UserRepository', () => {
         skip: searchUsersPayload.page * searchUsersPayload.count,
         orderBy: { [searchUsersPayload.orderBy]: searchUsersPayload.order },
       });
-      expect(users).toHaveLength(3);
-      expect(users).toEqual(usersMock);
     });
   });
 
@@ -111,9 +110,9 @@ describe('UserRepository', () => {
       const user = await repository.findOne(regularUserMock.id);
 
       expect(user).toBeDefined();
+      expect(user).toEqual(regularUserMock);
       expect(prismaService.user.findUniqueOrThrow).toHaveBeenCalled();
       expect(prismaService.user.findUniqueOrThrow).toHaveBeenCalledTimes(1);
-      expect(user).toEqual(regularUserMock);
     });
   });
 
@@ -124,9 +123,9 @@ describe('UserRepository', () => {
       const user = await repository.findByEmail(regularUserMock.email);
 
       expect(user).toBeDefined();
+      expect(user).toEqual(regularUserMock);
       expect(prismaService.user.findUniqueOrThrow).toHaveBeenCalled();
       expect(prismaService.user.findUniqueOrThrow).toHaveBeenCalledTimes(1);
-      expect(user).toEqual(regularUserMock);
     });
   });
 
@@ -186,11 +185,11 @@ describe('UserRepository', () => {
       const user = await repository.delete(regularUserMock.id);
 
       expect(user).toBeDefined();
+      expect(user).toEqual(regularUserMock);
       expect(prismaService.user.delete).toHaveBeenCalled();
       expect(prismaService.user.delete).toHaveBeenCalledTimes(1);
       expect(prismaService.user.findUniqueOrThrow).toHaveBeenCalled();
       expect(prismaService.user.findUniqueOrThrow).toHaveBeenCalledTimes(1);
-      expect(user).toEqual(regularUserMock);
     });
   });
 });
