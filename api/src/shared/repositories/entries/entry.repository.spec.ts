@@ -91,7 +91,6 @@ describe('EntryRepository', () => {
   describe('update()', () => {
     const updateEntryPayload: UpdateEntryType = {
       calories: 100,
-      userId: regularRequestUserMock.id,
       expectedCaloriesPerDay: regularRequestUserMock.caloriesPerDay,
     };
 
