@@ -13,7 +13,6 @@ export interface CreateEntryType extends CreateEntryDTO {
 }
 
 export interface UpdateEntryType extends UpdateEntryDTO {
-  calories: number;
   userId: string;
   expectedCaloriesPerDay: number;
 }
@@ -85,9 +84,8 @@ export class EntryRepository {
       expectedCaloriesPerDay,
       userId,
     }: UpdateEntryType,
+    oldEntry: EntryEntity,
   ): Promise<EntryEntity> {
-    const oldEntry = await this._prisma.entry.findUniqueOrThrow({ where: { id } });
-
     const data: Prisma.EntryUpdateInput = {
       text,
       date,
@@ -110,10 +108,10 @@ export class EntryRepository {
   }
 
   public async delete(id: string): Promise<EntryEntity> {
-    await this._prisma.entry.findUniqueOrThrow({ where: { id } });
     return this._prisma.entry.delete({ where: { id } });
   }
 
+  // TODO: Move to service layer;
   private async _caloriesExcedeed(
     date: Date,
     calories: number,
