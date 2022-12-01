@@ -9,7 +9,7 @@
       "restart": true,
       "skipFiles": [
         "<node_internals>/**",
-        "${workspaceFolder}/api/node_modules/**"
+        "${workspaceFolder}/node_modules/**"
       ]
     },
     {
@@ -18,14 +18,14 @@
       "request": "attach",
       "address": "0.0.0.0",
       "port": 9229,
-      "localRoot": "${workspaceFolder}/api",
+      "localRoot": "${workspaceFolder}",
       "remoteRoot": "/app",
       "restart": true,
       "sourceMaps": true,
       "smartStep": true,
       "skipFiles": [
         "<node_internals>/**",
-        "${workspaceFolder}/api/node_modules/**"
+        "${workspaceFolder}/node_modules/**"
       ]
     }
   ]

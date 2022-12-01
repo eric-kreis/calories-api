@@ -3,24 +3,28 @@ version: '3.8'
 services:
   api-dev:
     build:
-      context: ./api
+      context: .
       target: builder
     entrypoint: yarn start:debug 0.0.0.0:9229
+    env_file:
+      - .env
     ports:
       - 3000:3000
       - 9229:9229
     volumes:
-      - ./api:/app
+      - ./:/app
     network_mode: host
     depends_on:
       - mongo
 
   api-prod:
     build:
-      context: ./api
+      context: .
       target: server
+    env_file:
+      - .env
     volumes:
-      - ./api:/app
+      - ./:/app
     ports:
       - 3000:3000
     network_mode: host
