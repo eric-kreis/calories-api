@@ -20,6 +20,7 @@ const config: Config.InitialOptions = {
     '^@decorators/(.*)': '<rootDir>/shared/decorators/$1',
     '^@guards/(.*)': '<rootDir>/shared/guards/$1',
     '^@dtos/(.*)': '<rootDir>/shared/dtos/$1',
+    '^@entry/(.*)': '<rootDir>/entry/$1',
     '^@user/(.*)': '<rootDir>/user/$1',
     '^@auth/(.*)': '<rootDir>/auth/$1',
     '^@mocks/(.*)': '<rootDir>/shared/mocks/$1',
