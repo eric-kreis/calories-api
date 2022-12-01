@@ -13,7 +13,6 @@ export interface CreateEntryType extends CreateEntryDTO {
 }
 
 export interface UpdateEntryType extends UpdateEntryDTO {
-  userId: string;
   expectedCaloriesPerDay: number;
 }
 
@@ -82,7 +81,6 @@ export class EntryRepository {
       time,
       calories,
       expectedCaloriesPerDay,
-      userId,
     }: UpdateEntryType,
     oldEntry: EntryEntity,
   ): Promise<EntryEntity> {
@@ -100,7 +98,7 @@ export class EntryRepository {
         date,
         calories - oldEntry.calories,
         expectedCaloriesPerDay,
-        userId,
+        oldEntry.userId,
       );
     }
 
