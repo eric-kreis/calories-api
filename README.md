@@ -1,73 +1,67 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
-
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Installation
-
-```bash
-$ npm install
-```
+# Calories API
 
 ## Running the app
 
-```bash
-# development
-$ npm run start
+### Requirements
 
+This project uses [NutrionixAPI](https://www.nutritionix.com/business/api) and a MongoDB ReplicaSet cluster. Thus, you must follow these steps:
+
+1. Setting up NutrionixAPI's credentials in a `.env` file
+    1. Create a free tier developer account in [NutrionixAPI](https://www.nutritionix.com/business/api) and get your personal credentials
+    2. In the project root, copy the content of `.env.example`, create a file called `.env` and pass it to your `.env` file.
+
+    ![image](https://user-images.githubusercontent.com/51938137/205082180-eaad473c-fc89-4c62-b353-4a181bd71519.png)
+
+2. Setting up MongoDB
+You can choose two ways to setup the application's database:
+    1. With Docker using docker compose (your don't need to change the copied `DATABASE_URL` in `.env`):
+    ```bash
+    # starts your mongodb replicaset locally
+    $ docker compose up mongo -d
+
+    # setup the collections and indexes
+    $ npx prisma db push
+    ```
+    2. With MongoDB Atlas (free tier):
+    The easiest way to setup a replica set cluster is using MongoDB Atlas. First, create a MongoDB Atlas instance, update the environment variable `DATABASE_URL` with your instance url adding the paramater `authSource=admin` (as it is in the `.env.example` file). To create your instance using atlas see: [Get Started with Atlas](https://www.mongodb.com/docs/atlas/getting-started/)
+
+### All setted up? Let's execute!
+
+1. With Docker:
+
+```bash
 # watch mode
-$ npm run start:dev
+$ docker compose up api-dev
 
 # production mode
-$ npm run start:prod
+$ docker compose up api-prod
+```
+
+2. With Package manager:
+
+**NOTE:** This project was created using the Node package manager [Yarn](https://yarnpkg.com/) (recommended), but feel free to use [NPM](https://www.npmjs.com/) or other ones.
+
+```bash
+# watch mode
+$ yarn
+$ yarn start:dev
+
+# production mode
+$ yarn
+$ yarn build
+$ yarn start
 ```
 
 ## Test
 
+This project has 100% unit test coverage (ignoring files that cannot be unit tested). To run the tests execute in your command line (CLI):
+
 ```bash
 # unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
+$ yarn test
 
 # test coverage
-$ npm run test:cov
+$ yarn test:cov
 ```
 
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+**NOTE:** If you haven't done before, run `yarn` to install the dependencies before the tests commands. 
