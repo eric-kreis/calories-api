@@ -1,5 +1,15 @@
 # Calories API
 
+Welcome to CaloriesAPI! This project was developed for the selection process at [Olby](https://olby.com/). Here you will find an Application Programming Interface (API) focused on helping people to manage their meals and control the amount of calories consumed per day.
+
+## Description and Technologies
+
+The CaloriesAPI is a TypeScript RESTful API and the main techologies used for its development were:
+- [NestJS](https://www.mongodb.com/home) - Framework;
+- [MongoDB](https://www.mongodb.com/home) - Database;
+- [Prisma](https://www.prisma.io/) - ORM;
+- [Jest](https://jestjs.io/) - Testing Framework;
+
 ## Running the app
 
 ### Requirements
@@ -64,4 +74,4 @@ $ yarn test
 $ yarn test:cov
 ```
 
-**NOTE:** If you haven't done before, run `yarn` to install the dependencies before the tests commands. 
+**NOTE:** If you haven't done before, run `yarn` to install the dependencies before testing.
