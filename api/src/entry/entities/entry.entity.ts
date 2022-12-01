@@ -18,8 +18,4 @@ export class EntryEntity implements EntryModel {
   lessThanExpected: boolean;
 
   userId: string;
-
-  constructor(partial: Partial<EntryEntity>) {
-    Object.assign(this, partial);
-  }
 }
