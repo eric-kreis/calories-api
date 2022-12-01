@@ -33,5 +33,6 @@ module.exports = {
       },
     ],
     '@typescript-eslint/dot-notation': 'off',
+    'no-param-reassign': 'off',
   },
 };

@@ -27,6 +27,7 @@
       "@dtos/*": ["./src/shared/dtos/*"],
       "@decorators/*": ["./src/shared/decorators/*"],
       "@guards/*": ["./src/shared/guards/*"],
+      "@entry/*": ["./src/entry/*"],
       "@user/*": ["./src/user/*"],
       "@auth/*": ["./src/auth/*"],
       "@mocks/*": ["./src/shared/mocks/*"]
