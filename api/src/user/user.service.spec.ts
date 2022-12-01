@@ -77,6 +77,7 @@ describe('UserService', () => {
 
   describe('update()', () => {
     it('should return the updated user', async () => {
+      repository.findOne.mockResolvedValue(regularUserMock);
       repository.update.mockResolvedValue(regularUserMock);
 
       const updatedUser = await service.update(regularUserMock.id, {}, regularRequestUserMock);
@@ -89,6 +90,8 @@ describe('UserService', () => {
     });
 
     it('should throw an forbidden error if user cannot access the resource', async () => {
+      repository.findOne.mockResolvedValue(regularUserMock);
+
       try {
         await service.update(adminUserMock.id, {}, regularRequestUserMock);
       } catch (e) {
@@ -98,6 +101,8 @@ describe('UserService', () => {
     });
 
     it('should throw an forbidden error if a non-admin try to update role', async () => {
+      repository.findOne.mockResolvedValue(regularUserMock);
+
       try {
         await service.update(regularUserMock.id, { role: Roles.ADMIN }, managerRequestUserMock);
       } catch (e) {
@@ -109,6 +114,7 @@ describe('UserService', () => {
 
   describe('delete()', () => {
     it('should return the updated user', async () => {
+      repository.findOne.mockResolvedValue(regularUserMock);
       repository.delete.mockResolvedValue(regularUserMock);
 
       const updatedUser = await service.delete(regularUserMock.id, regularRequestUserMock);

@@ -188,8 +188,6 @@ describe('UserRepository', () => {
       expect(user).toEqual(regularUserMock);
       expect(prismaService.user.delete).toHaveBeenCalled();
       expect(prismaService.user.delete).toHaveBeenCalledTimes(1);
-      expect(prismaService.user.findUniqueOrThrow).toHaveBeenCalled();
-      expect(prismaService.user.findUniqueOrThrow).toHaveBeenCalledTimes(1);
     });
   });
 });

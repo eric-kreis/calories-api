@@ -31,6 +31,7 @@ export class UserService {
     reqUser: RequestUserEntity,
   ): Promise<UserEntity> {
     this._canAccessResource(id, reqUser);
+    await this._userRepository.findOne(id);
 
     if (data.role && !this._roleService.isAdmin(reqUser.role)) {
       throw new ForbiddenException('You cannot update roles');
@@ -43,8 +44,8 @@ export class UserService {
 
   public async delete(id: string, reqUser: RequestUserEntity): Promise<UserEntity> {
     this._canAccessResource(id, reqUser);
-
     const userToDelete = await this._userRepository.findOne(id);
+
     const cannotDelete = (
       this._roleService.isManager(reqUser.role)
       && !this._roleService.isRegular(userToDelete.role)
@@ -59,10 +60,10 @@ export class UserService {
     return new UserEntity(deletedUser);
   }
 
-  private _canAccessResource(id: string, reqUser: RequestUserEntity): void {
+  private _canAccessResource(resourceId: string, reqUser: RequestUserEntity): void {
     const hasAccess = (
       this._roleService.isAdminOrManager(reqUser.role)
-      || this._roleService.canAccessResouce(id, reqUser.id)
+      || this._roleService.canAccessResouce(resourceId, reqUser.id)
     );
 
     if (!hasAccess) {

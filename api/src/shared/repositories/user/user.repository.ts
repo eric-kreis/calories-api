@@ -77,8 +77,6 @@ export class UserRepository {
       caloriesPerDay,
     }: UpdateUserDTO,
   ): Promise<UserEntity> {
-    await this._prisma.user.findUniqueOrThrow({ where: { id } });
-
     if (email) {
       const userFromEmail = await this._prisma.user.findUnique({ where: { email } });
       if (userFromEmail) throw new ConflictException('Email already registred');
@@ -102,7 +100,6 @@ export class UserRepository {
   }
 
   public async delete(id: string): Promise<UserEntity> {
-    await this._prisma.user.findUniqueOrThrow({ where: { id } });
     return this._prisma.user.delete({ where: { id } });
   }
 }
