@@ -15,7 +15,7 @@ The CaloriesAPI is a TypeScript RESTful API and the main techologies used for it
 
 ### Requirements
 
-How doees this project uses [NutritionixAPI](https://www.nutritionix.com/business/api) and a MongoDB ReplicaSet cluster. Thus, you must follow these steps:
+How does this project uses [NutritionixAPI](https://www.nutritionix.com/business/api) and a MongoDB ReplicaSet cluster. Thus, you must follow these steps:
 
 1. Setting up NutritionixAPI's credentials in a `.env` file
     1. Create a free tier developer account in [NutritionixAPI](https://www.nutritionix.com/business/api) and get your personal credentials
@@ -48,7 +48,7 @@ $ docker compose up api-dev
 $ docker compose up api-prod
 ```
 
-2. With Package manager:
+2. With a NodeJS package manager:
 
 **NOTE:** This project was created using the Node package manager [Yarn](https://yarnpkg.com/) (recommended), but feel free to use [NPM](https://www.npmjs.com/) or other ones.
 
